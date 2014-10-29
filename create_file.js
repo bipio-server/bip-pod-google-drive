@@ -1,8 +1,5 @@
 /**
  *
- * The Bipio Google Pod.  chrome_push action definition
- * ---------------------------------------------------------------
- *
  * @author Michael Pearson <github@m.bip.io>
  * Copyright (c) 2010-2014 Michael Pearson https://github.com/mjpearson
  *

@@ -35,13 +35,14 @@ Google = new Pod({
       "scopes" : [
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/drive.file"
+        "https://www.googleapis.com/auth/drive"
       ],
       "extras" : {
         "accessType" : "offline",
         "approvalPrompt" : "force"
       }
-    }
+    },
+    trackDuplicates : true
   },
   oAuthRefresh : function(refreshToken, next) {
     var c = this._config;
@@ -102,6 +103,7 @@ Google.getOAuthClient = function(sysImports) {
 }
 
 Google.add(require('./create_file.js'));
+Google.add(require('./on_new_file.js'));
 
 // -----------------------------------------------------------------------------
 module.exports = Google;
