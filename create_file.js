@@ -17,6 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var gapi = require('googleapis'),
+  drive = gapi.drive('v2'),
   fs = require('fs');
 
 function CreateFile(podConfig) {
@@ -32,11 +33,39 @@ CreateFile.prototype = {};
 
 CreateFile.prototype.getSchema = function() {
   return {
-    'exports' : {
-      properties : {
-        id : {
-          type : 'string',
-          description : 'File ID'
+    "exports" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "File ID"
+        },
+        "title" : {
+          "type" : "string",
+          "description" : "File Title"
+        },
+        "originalFilename" : {
+          "type" : "string",
+          "description" : "Original Filename"
+        },
+        "iconLink" : {
+          "type" : "string",
+          "description" : "Icon Link"
+        },
+        "mimeType" : {
+          "type" : "string",
+          "description" : "Mime Type"
+        },
+        "thumbnailLink" : {
+          "type" : "string",
+          "description" : "Thumbnail Link"
+        },
+        "createdDate" : {
+          "type" : "string",
+          "description" : "Created Date"
+        },
+        "downloadUrl" : {
+          "type" : "string",
+          "description" : "Download URL"
         }
       }
     }
@@ -47,32 +76,30 @@ CreateFile.prototype.invoke = function(imports, channel, sysImports, contentPart
   var self = this,
     exports = {},
     log = this.$resource.log,
-    pod = this.pod;
+    pod = this.pod,
+    auth = self.pod.getOAuthClient(sysImports);
 
-  gapi.discover('drive', 'v2').execute(function(err, client) {
-    var auth = self.pod.getOAuthClient(sysImports);
-    for (var i = 0; i < contentParts._files.length; i++) {
-      (function(file) {
-        fs.readFile(file.localpath, function(err, buffer) {
-          if (err) {
-            next(err);
-          } else {
-            var args = {
-              title: file.name,
-              mimeType: file.type
-            }
-            client.drive.files.insert(args)
-              .withMedia(file.type, buffer)
-              .withAuthClient(auth)
-              .execute(function(err, result) {
-                next(err, result, contentParts, buffer.size);
-              });
-          }
-        });
-      })(contentParts._files[i]);
-    }
-  });
+  for (var i = 0; i < contentParts._files.length; i++) {
+    (function(file) {
+      var args = {
+        auth : auth,
+        resource : {
+          title: file.name,
+          mimeType: file.type
+        },
+        media : {
+          mimeType: file.type,
+          body : fs.createReadStream(file.localpath)
+        }
+      }
 
+      drive.files.insert(args, function(err, result) {
+        next(err, result);
+        console.log(arguments);
+      });
+
+    })(contentParts._files[i]);
+  }
 }
 
 // -----------------------------------------------------------------------------
