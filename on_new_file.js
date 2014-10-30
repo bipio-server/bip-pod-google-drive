@@ -24,7 +24,7 @@ function OnNewFile(podConfig) {
   this.name = 'on_new_file';
   this.title = 'On A New File',
   this.description = "Triggers when a new file appears in your Google Drive",
-  this.trigger = false;
+  this.trigger = true;
   this.singleton = false;
   this.podConfig = podConfig;
 }

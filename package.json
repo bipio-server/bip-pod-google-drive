@@ -1,6 +1,6 @@
 {
   "name": "bip-pod-google-drive",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Michael Pearson",
   "description": "Google Drive Pod for Bipio",
   "keywords": [
