@@ -27,6 +27,7 @@ Google = new Pod({
   description : '<a href="https://drive.google.com/apis-explorer">Google Drive</a> Google Drive is a file storage and synchronization service provided by Google',
   authType : 'oauth', // @todo hybrid api keys/oauth tokens
   passportStrategy : require('passport-google-oauth').OAuth2Strategy,
+  trackDuplicates : true,
   config : {
     // oauth application keys
     "oauth": {
@@ -41,8 +42,7 @@ Google = new Pod({
         "accessType" : "offline",
         "approvalPrompt" : "force"
       }
-    },
-    trackDuplicates : true
+    }
   },
   oAuthRefresh : function(refreshToken, next) {
     var c = this._config;

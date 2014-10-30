@@ -25,7 +25,7 @@ function OnNewFile(podConfig) {
   this.title = 'On A New File',
   this.description = "Triggers when a new file appears in your Google Drive",
   this.trigger = false;
-  this.singleton = true;
+  this.singleton = false;
   this.podConfig = podConfig;
 }
 
@@ -40,6 +40,42 @@ OnNewFile.prototype.getSchema = function() {
           "description" : "Search Query"
         }
       }
+    },
+    "exports" : {
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "File ID"
+        },
+        "title" : {
+          "type" : "string",
+          "description" : "File Title"
+        },
+        "originalFilename" : {
+          "type" : "string",
+          "description" : "Original Filename"
+        },
+        "iconLink" : {
+          "type" : "string",
+          "description" : "Icon Link"
+        },
+        "mimeType" : {
+          "type" : "string",
+          "description" : "Mime Type"
+        },
+        "thumbnailLink" : {
+          "type" : "string",
+          "description" : "Thumbnail Link"
+        },
+        "createdDate" : {
+          "type" : "string",
+          "description" : "Created Date"
+        },
+        "downloadUrl" : {
+          "type" : "string",
+          "description" : "Download URL"
+        }
+      }
     }
   }
 }
@@ -47,26 +83,34 @@ OnNewFile.prototype.getSchema = function() {
 OnNewFile.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
     exports = {},
-    log = this.$resource.log,
+    $resource = this.$resource,
+    log = $resource.log,
     pod = this.pod,
     args = {
       auth : self.pod.getOAuthClient(sysImports)
     }
 
+  // @see https://developers.google.com/drive/web/search-parameters
   if (channel.config.query) {
-    args.q = channel.config.query;
+    args.q = ' title contains "' + channel.config.query.replace(/"/g, '\""') + '"';
   }
 
   drive.files.list(args, function(err, files) {
-    console.log(arguments);
+    var f;
     if (err) {
       next(err);
     } else {
-      console.log(files);
+      for (var i = 0; i < files.items.length; i++) {
+        f = files.items[i];
+
+        // track new items per query
+        f['id_query'] = f['id'] + (args.q || '');
+        $resource.dupFilter(f, 'id_query', channel, sysImports, function(err, file) {
+          next(err, file);
+        });
+      }
     }
-
   });
-
 }
 
 // -----------------------------------------------------------------------------

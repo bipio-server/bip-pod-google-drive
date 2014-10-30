@@ -24,7 +24,7 @@ function CreateFile(podConfig) {
   this.title = 'Create a File on Google Drive',
   this.description = "Uploads any present file to Google drive",
   this.trigger = false;
-  this.singleton = true;
+  this.singleton = false;
   this.podConfig = podConfig;
 }
 
