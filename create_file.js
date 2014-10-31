@@ -37,11 +37,15 @@ CreateFile.prototype.getSchema = function() {
       "properties" : {
         "id" : {
           "type" : "string",
-          "description" : "File ID"
+          "description" : "ID"
         },
         "title" : {
           "type" : "string",
-          "description" : "File Title"
+          "description" : "Title"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description"
         },
         "originalFilename" : {
           "type" : "string",
