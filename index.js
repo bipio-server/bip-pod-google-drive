@@ -22,7 +22,7 @@ var Pod = require('bip-pod'),
 gapi = require('googleapis'),
 https = require('https'),
 Google = new Pod({
-  name : 'google-drive',
+  name : 'google_drive',
   title : 'Google Drive',
   description : '<a href="https://drive.google.com/apis-explorer">Google Drive</a> Google Drive is a file storage and synchronization service provided by Google',
   authType : 'oauth', // @todo hybrid api keys/oauth tokens

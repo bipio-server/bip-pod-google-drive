@@ -95,7 +95,6 @@ CreateFile.prototype.invoke = function(imports, channel, sysImports, contentPart
 
       drive.files.insert(args, function(err, result) {
         next(err, result);
-        console.log(arguments);
       });
 
     })(contentParts._files[i]);

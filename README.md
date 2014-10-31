@@ -1,4 +1,4 @@
-![Google Drive](google-drive.png) bip-pod-google
+![Google Drive](google_drive.png) bip-pod-google
 =======
 
 [Google Drive](https://drive.google.com) Pod for [BipIO](https://bip.io).
