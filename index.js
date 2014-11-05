@@ -20,6 +20,7 @@
  */
 var Pod = require('bip-pod'),
 gapi = require('googleapis'),
+drive = gapi.drive('v2'),
 https = require('https'),
 Google = new Pod({
   name : 'google-drive',
@@ -84,6 +85,16 @@ Google = new Pod({
     req.on('error', function(e) {
       next(e);
     });
+  },
+  "renderers" : {
+    "list_files" : {
+      "description" : "List Your Files",
+      "contentType" : DEFS.CONTENTTYPE_JSON
+    },
+    "list_spreadsheets" : {
+      "description" : "List Your Spreadsheets",
+      "contentType" : DEFS.CONTENTTYPE_JSON
+    }
   }
 });
 
@@ -102,7 +113,33 @@ Google.getOAuthClient = function(sysImports) {
   return oauth2Client;
 }
 
+//mimeType: "application/vnd.google-apps.spreadsheet"
+
+Google.rpc = function(action, method, sysImports, options, channel, req, res) {
+  var auth = this.getOAuthClient(sysImports);
+  if (method == 'list_files') {
+    drive.files.list({
+      auth : auth
+    }, function(err, result, gRes) {
+      res.status(gRes.statusCode).send(result);
+    });
+
+  } else if (method == 'list_spreadsheets') {
+    drive.files.list({
+      auth : auth,
+      q : "trashed = false and mimeType = 'application/vnd.google-apps.spreadsheet'",
+    }, function(err, result, gRes) {
+      res.status(gRes.statusCode).send(result);
+    });
+
+  } else {
+    this.__proto__.rpc.apply(this, arguments);
+  }
+}
+
 Google.add(require('./create_file.js'));
+Google.add(require('./create_spreadsheet.js'));
+// Google.add(require('./add_spreadsheet_row.js')); -- dumped, too hard for now.
 Google.add(require('./on_new_file.js'));
 
 // -----------------------------------------------------------------------------
