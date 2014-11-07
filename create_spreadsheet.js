@@ -17,21 +17,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var gapi = require('googleapis'),
-  drive = gapi.drive('v2');
+  drive = gapi.drive('v2'),
+  fs = require('fs');
 
-function CreateFile(podConfig) {
-  this.name = 'create_file';
-  this.title = 'Create a File on Google Drive',
-  this.description = "Uploads any present file to Google drive",
+function CreateSpreadsheet(podConfig) {
+  this.name = 'create_spreadsheet';
+  this.title = 'Create a Spreadsheet',
+  this.description = "Create a Spreadsheet on Google Drive",
   this.trigger = false;
   this.singleton = false;
   this.podConfig = podConfig;
 }
 
-CreateFile.prototype = {};
+CreateSpreadsheet.prototype = {};
 
-CreateFile.prototype.getSchema = function() {
+CreateSpreadsheet.prototype.getSchema = function() {
   return {
+    "imports" : {
+      "properties" : {
+        "headers" : {
+          "type" : "string",
+          "description" : "Column Headers"
+        },
+        "title" : {
+          "type" : "string",
+          "description" : "Title"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description"
+        }
+      }
+    },
     "exports" : {
       "properties" : {
         "id" : {
@@ -75,40 +92,30 @@ CreateFile.prototype.getSchema = function() {
   }
 }
 
-CreateFile.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
+CreateSpreadsheet.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
     exports = {},
     log = this.$resource.log,
-    $resource = this.$resource,
     pod = this.pod,
     auth = self.pod.getOAuthClient(sysImports);
 
-  for (var i = 0; i < contentParts._files.length; i++) {
-    (function(file) {
-      $resource.file.get(file, function(err, fileStruct, stream) {
-        if (err) {
-          next(err);
-        } else {
-          var args = {
-            auth : auth,
-            resource : {
-              title: fileStruct.name,
-              mimeType: fileStruct.type
-            },
-            media : {
-              mimeType: fileStruct.type,
-              body : stream
-            }
-          }
 
-          drive.files.insert(args, function(err, result) {
-            next(err, result);
-          });
-        }
-      });
-    })(contentParts._files[i]);
-  }
+  drive.files.insert({
+      auth : auth,
+      convert : true,
+      resource : {
+        title : imports.title,
+        mimeType : 'text/csv'
+      },
+      media : {
+        mimeType : 'text/csv',
+        body : imports.headers + '\n'
+      }
+    }, function(err, result) {
+      console.log(arguments);
+      next(err, result);
+    });
 }
 
 // -----------------------------------------------------------------------------
-module.exports = CreateFile;
+module.exports = CreateSpreadsheet;
