@@ -1,6 +1,6 @@
 {
   "name": "bip-pod-google-drive",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "author": "Michael Pearson",
   "description": "Google Drive Pod for Bipio",
   "keywords": [
@@ -25,7 +25,6 @@
   ],
   "main": ".",
   "dependencies": {
-    "bip-pod": ">=0.0.1",
     "googleapis": "^1.0.20",
     "passport-google-oauth": ">=0.1.5",
     "pkginfo": "0.2.x"

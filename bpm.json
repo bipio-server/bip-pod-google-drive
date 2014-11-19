@@ -1,0 +1,223 @@
+{
+  "name": "google-drive",
+  "title": "Google Drive",
+  "description": "<a href=\"https://drive.google.com/apis-explorer\">Google Drive</a> Google Drive is a file storage and synchronization service provided by Google",
+  "url": "",
+  "trackDuplicates": true,
+  "config": {
+    "oauth": {
+      "clientID": "",
+      "clientSecret": "",
+      "scopes": [
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/drive",
+        "https://www.googleapis.com/auth/drive.file"
+      ],
+      "extras": {
+        "accessType": "offline",
+        "approvalPrompt": "force"
+      }
+    }
+  },
+  "auth": {
+    "strategy": "oauth",
+    "passport" : {
+     "provider" : "google-oauth",
+     "strategy" : "OAuth2Strategy"
+   }
+  },
+  "rpcs": {
+    "list_files": {
+      "contentType": "application/json",
+      "title": "List Your Files"
+    },
+    "list_spreadsheets": {
+      "contentType": "application/json",
+      "title": "List Your Spreadsheets"
+    }
+  },
+  "actions": {
+    "create_file": {
+      "title": "Create a File on Google Drive",
+      "description": "Uploads any present file to Google drive",
+      "trigger": "invoke",
+      "config": {
+        "properties": {},
+        "definitions": {}
+      },
+      "exports": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "originalFilename": {
+            "type": "string",
+            "description": "Original Filename"
+          },
+          "iconLink": {
+            "type": "string",
+            "description": "Icon Link"
+          },
+          "mimeType": {
+            "type": "string",
+            "description": "Mime Type"
+          },
+          "thumbnailLink": {
+            "type": "string",
+            "description": "Thumbnail Link"
+          },
+          "createdDate": {
+            "type": "string",
+            "description": "Created Date"
+          },
+          "downloadUrl": {
+            "type": "string",
+            "description": "Download URL"
+          }
+        }
+      },
+      "imports": {
+        "properties": {}
+      }
+    },
+    "create_spreadsheet": {
+      "title": "Create a Spreadsheet",
+      "description": "Create a Spreadsheet on Google Drive",
+      "trigger": "invoke",
+      "config": {
+        "properties": {},
+        "definitions": {}
+      },
+      "exports": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "originalFilename": {
+            "type": "string",
+            "description": "Original Filename"
+          },
+          "iconLink": {
+            "type": "string",
+            "description": "Icon Link"
+          },
+          "mimeType": {
+            "type": "string",
+            "description": "Mime Type"
+          },
+          "thumbnailLink": {
+            "type": "string",
+            "description": "Thumbnail Link"
+          },
+          "createdDate": {
+            "type": "string",
+            "description": "Created Date"
+          },
+          "downloadUrl": {
+            "type": "string",
+            "description": "Download URL"
+          }
+        }
+      },
+      "imports": {
+        "properties": {
+          "headers": {
+            "type": "string",
+            "description": "Column Headers"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          }
+        },
+        "disposition": [
+          "headers",
+          "title",
+          "description"
+        ]
+      }
+    },
+    "on_new_file": {
+      "title": "On A New File",
+      "description": "Triggers when a new file appears in your Google Drive",
+      "trigger": "poll",
+      "config": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search Query"
+          }
+        },
+        "disposition": [
+          "query"
+        ]
+      },
+      "exports": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description"
+          },
+          "originalFilename": {
+            "type": "string",
+            "description": "Original Filename"
+          },
+          "iconLink": {
+            "type": "string",
+            "description": "Icon Link"
+          },
+          "mimeType": {
+            "type": "string",
+            "description": "Mime Type"
+          },
+          "thumbnailLink": {
+            "type": "string",
+            "description": "Thumbnail Link"
+          },
+          "createdDate": {
+            "type": "string",
+            "description": "Created Date"
+          },
+          "downloadUrl": {
+            "type": "string",
+            "description": "Download URL"
+          }
+        }
+      },
+      "imports": {
+        "properties": {}
+      }
+    }
+  }
+}
