@@ -23,30 +23,8 @@ gapi = require('googleapis'),
 drive = gapi.drive('v2'),
 https = require('https'),
 Google = new Pod({
-  name : 'google-drive',
-  title : 'Google Drive',
-  description : '<a href="https://drive.google.com/apis-explorer">Google Drive</a> Google Drive is a file storage and synchronization service provided by Google',
-  authType : 'oauth', // @todo hybrid api keys/oauth tokens
-  passportStrategy : require('passport-google-oauth').OAuth2Strategy,
-  trackDuplicates : true,
-  config : {
-    // oauth application keys
-    "oauth": {
-      "clientID" : "",
-      "clientSecret" : "",
-      "scopes" : [
-        "https://www.googleapis.com/auth/userinfo.email",
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/drive"
-      ],
-      "extras" : {
-        "accessType" : "offline",
-        "approvalPrompt" : "force"
-      }
-    }
-  },
   oAuthRefresh : function(refreshToken, next) {
-    var c = this._config;
+    var c = this.getConfig();
 
     // @see https://developers.google.com/accounts/docs/OAuth2WebServer#refresh
     var options = {
@@ -85,16 +63,6 @@ Google = new Pod({
     req.on('error', function(e) {
       next(e);
     });
-  },
-  "renderers" : {
-    "list_files" : {
-      "description" : "List Your Files",
-      "contentType" : DEFS.CONTENTTYPE_JSON
-    },
-    "list_spreadsheets" : {
-      "description" : "List Your Spreadsheets",
-      "contentType" : DEFS.CONTENTTYPE_JSON
-    }
   }
 });
 
@@ -136,11 +104,6 @@ Google.rpc = function(action, method, sysImports, options, channel, req, res) {
     this.__proto__.rpc.apply(this, arguments);
   }
 }
-
-Google.add(require('./create_file.js'));
-Google.add(require('./create_spreadsheet.js'));
-// Google.add(require('./add_spreadsheet_row.js')); -- dumped, too hard for now.
-Google.add(require('./on_new_file.js'));
 
 // -----------------------------------------------------------------------------
 module.exports = Google;

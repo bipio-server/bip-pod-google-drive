@@ -19,61 +19,9 @@
 var gapi = require('googleapis'),
   drive = gapi.drive('v2');
 
-function CreateFile(podConfig) {
-  this.name = 'create_file';
-  this.title = 'Create a File on Google Drive',
-  this.description = "Uploads any present file to Google drive",
-  this.trigger = false;
-  this.singleton = false;
-  this.podConfig = podConfig;
-}
+function CreateFile() {}
 
 CreateFile.prototype = {};
-
-CreateFile.prototype.getSchema = function() {
-  return {
-    "exports" : {
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "ID"
-        },
-        "title" : {
-          "type" : "string",
-          "description" : "Title"
-        },
-        "description" : {
-          "type" : "string",
-          "description" : "Description"
-        },
-        "originalFilename" : {
-          "type" : "string",
-          "description" : "Original Filename"
-        },
-        "iconLink" : {
-          "type" : "string",
-          "description" : "Icon Link"
-        },
-        "mimeType" : {
-          "type" : "string",
-          "description" : "Mime Type"
-        },
-        "thumbnailLink" : {
-          "type" : "string",
-          "description" : "Thumbnail Link"
-        },
-        "createdDate" : {
-          "type" : "string",
-          "description" : "Created Date"
-        },
-        "downloadUrl" : {
-          "type" : "string",
-          "description" : "Download URL"
-        }
-      }
-    }
-  }
-}
 
 CreateFile.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,

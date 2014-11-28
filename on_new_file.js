@@ -17,72 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var gapi = require('googleapis'),
-  drive = gapi.drive('v2'),
-  fs = require('fs');
+  drive = gapi.drive('v2');
 
-function OnNewFile(podConfig) {
-  this.name = 'on_new_file';
-  this.title = 'On A New File',
-  this.description = "Triggers when a new file appears in your Google Drive",
-  this.trigger = true;
-  this.singleton = false;
-  this.podConfig = podConfig;
-}
+function OnNewFile() {}
 
 OnNewFile.prototype = {};
-
-OnNewFile.prototype.getSchema = function() {
-  return {
-    "config" : {
-      "properties" : {
-        "query" : {
-          "type" : "string",
-          "description" : "Search Query"
-        }
-      }
-    },
-    "exports" : {
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "ID"
-        },
-        "title" : {
-          "type" : "string",
-          "description" : "Title"
-        },
-        "description" : {
-          "type" : "string",
-          "description" : "Description"
-        },
-        "originalFilename" : {
-          "type" : "string",
-          "description" : "Original Filename"
-        },
-        "iconLink" : {
-          "type" : "string",
-          "description" : "Icon Link"
-        },
-        "mimeType" : {
-          "type" : "string",
-          "description" : "Mime Type"
-        },
-        "thumbnailLink" : {
-          "type" : "string",
-          "description" : "Thumbnail Link"
-        },
-        "createdDate" : {
-          "type" : "string",
-          "description" : "Created Date"
-        },
-        "downloadUrl" : {
-          "type" : "string",
-          "description" : "Download URL"
-        }
-      }
-    }
-  }
-}
 
 OnNewFile.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,

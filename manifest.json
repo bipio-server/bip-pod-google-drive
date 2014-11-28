@@ -1,8 +1,8 @@
 {
   "name": "google-drive",
   "title": "Google Drive",
-  "description": "<a href=\"https://drive.google.com/apis-explorer\">Google Drive</a> Google Drive is a file storage and synchronization service provided by Google",
-  "url": "",
+  "description": "Google Drive is a file storage and synchronization service provided by Google",
+  "url": "https://drive.google.com/apis-explorer",
   "trackDuplicates": true,
   "config": {
     "oauth": {
@@ -153,10 +153,13 @@
             "description": "Description"
           }
         },
+        "required": [
+          "title"
+        ],
         "disposition": [
-          "headers",
           "title",
-          "description"
+          "description",
+          "headers"
         ]
       }
     },

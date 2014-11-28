@@ -20,77 +20,9 @@ var gapi = require('googleapis'),
   drive = gapi.drive('v2'),
   fs = require('fs');
 
-function CreateSpreadsheet(podConfig) {
-  this.name = 'create_spreadsheet';
-  this.title = 'Create a Spreadsheet',
-  this.description = "Create a Spreadsheet on Google Drive",
-  this.trigger = false;
-  this.singleton = false;
-  this.podConfig = podConfig;
-}
+function CreateSpreadsheet() {}
 
 CreateSpreadsheet.prototype = {};
-
-CreateSpreadsheet.prototype.getSchema = function() {
-  return {
-    "imports" : {
-      "properties" : {
-        "headers" : {
-          "type" : "string",
-          "description" : "Column Headers"
-        },
-        "title" : {
-          "type" : "string",
-          "description" : "Title"
-        },
-        "description" : {
-          "type" : "string",
-          "description" : "Description"
-        }
-      }
-    },
-    "exports" : {
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "ID"
-        },
-        "title" : {
-          "type" : "string",
-          "description" : "Title"
-        },
-        "description" : {
-          "type" : "string",
-          "description" : "Description"
-        },
-        "originalFilename" : {
-          "type" : "string",
-          "description" : "Original Filename"
-        },
-        "iconLink" : {
-          "type" : "string",
-          "description" : "Icon Link"
-        },
-        "mimeType" : {
-          "type" : "string",
-          "description" : "Mime Type"
-        },
-        "thumbnailLink" : {
-          "type" : "string",
-          "description" : "Thumbnail Link"
-        },
-        "createdDate" : {
-          "type" : "string",
-          "description" : "Created Date"
-        },
-        "downloadUrl" : {
-          "type" : "string",
-          "description" : "Download URL"
-        }
-      }
-    }
-  }
-}
 
 CreateSpreadsheet.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
@@ -99,12 +31,12 @@ CreateSpreadsheet.prototype.invoke = function(imports, channel, sysImports, cont
     pod = this.pod,
     auth = self.pod.getOAuthClient(sysImports);
 
-
   drive.files.insert({
       auth : auth,
       convert : true,
       resource : {
         title : imports.title,
+        description : imports.description,
         mimeType : 'text/csv'
       },
       media : {
@@ -112,7 +44,6 @@ CreateSpreadsheet.prototype.invoke = function(imports, channel, sysImports, cont
         body : imports.headers + '\n'
       }
     }, function(err, result) {
-      console.log(arguments);
       next(err, result);
     });
 }
