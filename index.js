@@ -68,16 +68,12 @@ Google = new Pod({
 
 Google.getOAuthClient = function(sysImports) {
   var OAuth2 = gapi.auth.OAuth2Client ? gapi.auth.OAuth2Client : gapi.auth.OAuth2,
-    podConfig = this.getConfig(),
-    oauth2Client = new OAuth2(
-      podConfig.oauth.clientID,
-      podConfig.oauth.clientSecret,
-      podConfig.oauth.callbackURL
-    );
+    oauth2Client = new OAuth2();
 
   oauth2Client.credentials = {
-    access_token : sysImports.auth.oauth.token
+    access_token : sysImports.auth.oauth.access_token
   };
+
   return oauth2Client;
 }
 
