@@ -23,6 +23,18 @@ function OnNewFile() {}
 
 OnNewFile.prototype = {};
 
+OnNewFile.prototype.trigger = function(imports, channel, sysImports, contentParts, next) {
+  this.invoke(imports, channel, sysImports, contentParts, function(err, exports) {
+    if (err) {
+      next(err);
+    } else {
+      $resource.dupFilter(exports, 'id_query', channel, sysImports, function(err, file) {
+        next(err, file);
+      });
+    }
+  });
+}
+
 OnNewFile.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
     exports = {},
@@ -44,13 +56,11 @@ OnNewFile.prototype.invoke = function(imports, channel, sysImports, contentParts
       next(err);
     } else {
       for (var i = 0; i < files.items.length; i++) {
-        f = files.items[i];
+        file = files.items[i];
 
         // track new items per query
-        f['id_query'] = f['id'] + (args.q || '');
-        $resource.dupFilter(f, 'id_query', channel, sysImports, function(err, file) {
-          next(err, file);
-        });
+        file['id_query'] = file['id'] + (args.q || '');
+        next(err, file);
       }
     }
   });
