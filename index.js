@@ -25,7 +25,6 @@ https = require('https'),
 Google = new Pod({
   oAuthRefresh : function(refreshToken, next) {
     var c = this.getConfig();
-
     // @see https://developers.google.com/accounts/docs/OAuth2WebServer#refresh
     var options = {
         hostname : 'accounts.google.com',
@@ -103,4 +102,3 @@ Google.rpc = function(action, method, sysImports, options, channel, req, res) {
 
 // -----------------------------------------------------------------------------
 module.exports = Google;
-
