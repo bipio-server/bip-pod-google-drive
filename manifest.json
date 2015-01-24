@@ -232,5 +232,8 @@
         "properties": {}
       }
     }
-  }
+  },
+  "tags": [
+    "productivity"
+  ]
 }
