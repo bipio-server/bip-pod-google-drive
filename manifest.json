@@ -60,39 +60,39 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "ID"
+            "title": "ID"
           },
           "title": {
             "type": "string",
-            "description": "Title"
+            "title": "Title"
           },
           "description": {
             "type": "string",
-            "description": "Description"
+            "title": "Description"
           },
           "originalFilename": {
             "type": "string",
-            "description": "Original Filename"
+            "title": "Original Filename"
           },
           "iconLink": {
             "type": "string",
-            "description": "Icon Link"
+            "title": "Icon Link"
           },
           "mimeType": {
             "type": "string",
-            "description": "Mime Type"
+            "title": "Mime Type"
           },
           "thumbnailLink": {
             "type": "string",
-            "description": "Thumbnail Link"
+            "title": "Thumbnail Link"
           },
           "createdDate": {
             "type": "string",
-            "description": "Created Date"
+            "title": "Created Date"
           },
           "downloadUrl": {
             "type": "string",
-            "description": "Download URL"
+            "title": "Download URL"
           }
         }
       },
@@ -112,39 +112,39 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "ID"
+            "title": "ID"
           },
           "title": {
             "type": "string",
-            "description": "Title"
+            "title": "Title"
           },
           "description": {
             "type": "string",
-            "description": "Description"
+            "title": "Description"
           },
           "originalFilename": {
             "type": "string",
-            "description": "Original Filename"
+            "title": "Original Filename"
           },
           "iconLink": {
             "type": "string",
-            "description": "Icon Link"
+            "title": "Icon Link"
           },
           "mimeType": {
             "type": "string",
-            "description": "Mime Type"
+            "title": "Mime Type"
           },
           "thumbnailLink": {
             "type": "string",
-            "description": "Thumbnail Link"
+            "title": "Thumbnail Link"
           },
           "createdDate": {
             "type": "string",
-            "description": "Created Date"
+            "title": "Created Date"
           },
           "downloadUrl": {
             "type": "string",
-            "description": "Download URL"
+            "title": "Download URL"
           }
         }
       },
@@ -152,15 +152,15 @@
         "properties": {
           "headers": {
             "type": "string",
-            "description": "Column Headers"
+            "title": "Column Headers"
           },
           "title": {
             "type": "string",
-            "description": "Title"
+            "title": "Title"
           },
           "description": {
             "type": "string",
-            "description": "Description"
+            "title": "Description"
           }
         },
         "required": [
@@ -181,7 +181,7 @@
         "properties": {
           "query": {
             "type": "string",
-            "description": "Search Query"
+            "title": "Search Query"
           }
         },
         "disposition": [
@@ -192,39 +192,39 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "ID"
+            "title": "ID"
           },
           "title": {
             "type": "string",
-            "description": "Title"
+            "title": "Title"
           },
           "description": {
             "type": "string",
-            "description": "Description"
+            "title": "Description"
           },
           "originalFilename": {
             "type": "string",
-            "description": "Original Filename"
+            "title": "Original Filename"
           },
           "iconLink": {
             "type": "string",
-            "description": "Icon Link"
+            "title": "Icon Link"
           },
           "mimeType": {
             "type": "string",
-            "description": "Mime Type"
+            "title": "Mime Type"
           },
           "thumbnailLink": {
             "type": "string",
-            "description": "Thumbnail Link"
+            "title": "Thumbnail Link"
           },
           "createdDate": {
             "type": "string",
-            "description": "Created Date"
+            "title": "Created Date"
           },
           "downloadUrl": {
             "type": "string",
-            "description": "Download URL"
+            "title": "Download URL"
           }
         }
       },
