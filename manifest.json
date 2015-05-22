@@ -100,6 +100,75 @@
         "properties": {}
       }
     },
+    "copy_file": {
+      "title": "Copy a File on Google Drive",
+      "description": "Copies A Google Drive File To A New Name",
+      "trigger": "invoke",
+      "config": {
+        "properties": {},
+        "definitions": {}
+      },
+      "exports": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "ID"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "originalFilename": {
+            "type": "string",
+            "title": "Original Filename"
+          },
+          "iconLink": {
+            "type": "string",
+            "title": "Icon Link"
+          },
+          "mimeType": {
+            "type": "string",
+            "title": "Mime Type"
+          },
+          "thumbnailLink": {
+            "type": "string",
+            "title": "Thumbnail Link"
+          },
+          "createdDate": {
+            "type": "string",
+            "title": "Created Date"
+          },
+          "downloadUrl": {
+            "type": "string",
+            "title": "Download URL"
+          }
+        }
+      },
+      "imports": {
+        "properties": {
+          "file_title" : {
+            "type" : "string",
+            "title" : "File Name To Copy"
+          },
+          "dest_file_title" : {
+            "type" : "string",
+            "title" : "New File Name"
+          }
+        },
+        "required" : [
+          "file_title",
+          "dest_file_title"
+        ],
+        "disposition" : [
+          "file_title",
+          "dest_file_title"
+        ]
+      }
+    },
     "create_spreadsheet": {
       "title": "Create a Spreadsheet",
       "description": "Create a Spreadsheet on Google Drive",
