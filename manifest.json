@@ -54,7 +54,8 @@
       "trigger": "invoke",
       "config": {
         "properties": {},
-        "definitions": {}
+        "definitions": {},
+        "disposition": []
       },
       "exports": {
         "properties": {
@@ -94,7 +95,18 @@
             "type": "string",
             "title": "Download URL"
           }
-        }
+        },
+        "disposition": [
+        	"id",
+        	"title",
+        	"description",
+        	"originalFilename",
+        	"iconLink",
+        	"mimeType",
+        	"thumbnailLink",
+        	"createdDate",
+        	"downloadUrl"
+        	]
       },
       "imports": {
         "properties": {}
@@ -146,7 +158,18 @@
             "type": "string",
             "title": "Download URL"
           }
-        }
+        },
+        "disposition": [
+        	"id",
+        	"title",
+        	"description",
+        	"originalFilename",
+        	"iconLink",
+        	"mimeType",
+        	"thumbnailLink",
+        	"createdDate",
+        	"downloadUrl"
+        	]
       },
       "imports": {
         "properties": {
@@ -215,7 +238,18 @@
             "type": "string",
             "title": "Download URL"
           }
-        }
+        },
+        "disposition": [
+        	"id",
+        	"title",
+        	"description",
+        	"originalFilename",
+        	"iconLink",
+        	"mimeType",
+        	"thumbnailLink",
+        	"createdDate",
+        	"downloadUrl"
+        	]
       },
       "imports": {
         "properties": {
@@ -295,7 +329,18 @@
             "type": "string",
             "title": "Download URL"
           }
-        }
+        },
+        "disposition": [
+        	"id",
+        	"title",
+        	"description",
+        	"originalFilename",
+        	"iconLink",
+        	"mimeType",
+        	"thumbnailLink",
+        	"createdDate",
+        	"downloadUrl"
+        	]
       },
       "imports": {
         "properties": {}
