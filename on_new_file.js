@@ -48,8 +48,8 @@ OnNewFile.prototype.invoke = function(imports, channel, sysImports, contentParts
     }
 
   // @see https://developers.google.com/drive/web/search-parameters
-  if (channel.config.query) {
-    args.q = ' title contains "' + channel.config.query.replace(/"/g, '\""') + '"';
+  if (imports.query) {
+    args.q = ' title contains "' + imports.query.replace(/"/g, '\""') + '"';
   }
 
   drive.files.list(args, function(err, files) {
