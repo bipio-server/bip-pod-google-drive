@@ -27,7 +27,8 @@
   "dependencies": {
     "googleapis": "^1.0.20",
     "passport-google-oauth": ">=0.1.5",
-    "pkginfo": "0.2.x"
+    "pkginfo": "0.2.x",
+    "edit-google-spreadsheet":">=0.0.1"
   },
   "engines": {
     "node": ">= 0.10.0"

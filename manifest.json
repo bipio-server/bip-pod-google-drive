@@ -345,7 +345,106 @@
       "imports": {
         "properties": {}
       }
+    },
+    "update_cell": {
+      "title": "Update a Spreadsheet Cell on Google Drive",
+      "description": "Update a Spreadsheet Cell on Google Drive",
+      "trigger": "poll",
+      "config": {
+        "properties": {
+        	"spreadsheetName":{
+	        	"type": "string",
+	            "title": "Spreadsheet Name"
+        	},
+        	"worksheetName":{
+	        	"type": "string",
+	            "title": "Worksheet Name"
+        	},
+        	"row":{
+	        	"type": "string",
+	            "title": "Row Number"
+        	},
+        	"col":{
+	        	"type": "string",
+	            "title": "Column Number"
+        	},
+        	"value":{
+	        	"type": "string",
+	            "title": "Cell value"
+        	}
+        },
+        "definitions": {},
+        "required": ["spreadsheetName","worksheetName","row","col"],
+        "disposition": ["spreadsheetName","worksheetName","row","col"]
+      },
+      "exports": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "ID"
+          },
+          "value": {
+            "type": "string",
+            "title": "Cell Value"
+          }
+        },
+        "disposition": [
+        	"id",
+        	"value"
+        	]
+      },
+      "imports": {
+        "properties": {}
+      }
+    },
+    "read_cell": {
+      "title": "Read a Spreadsheet Cell on Google Drive",
+      "description": "Read a Spreadsheet Cell on Google Drive",
+      "trigger": "poll",
+      "config": {
+        "properties": {
+        	"spreadsheetName":{
+	        	"type": "string",
+	            "title": "Spreadsheet Name"
+        	},
+        	"worksheetName":{
+	        	"type": "string",
+	            "title": "Worksheet Name"
+        	},
+        	"row":{
+	        	"type": "string",
+	            "title": "Row Number"
+        	},
+        	"col":{
+	        	"type": "string",
+	            "title": "Column Number"
+        	}
+        },
+        "definitions": {},
+        "required": ["spreadsheetName","worksheetName","row","col"],
+        "disposition": ["spreadsheetName","worksheetName","row","col"]
+      },
+      "exports": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "ID"
+          },
+          "value": {
+            "type": "string",
+            "title": "Cell Value"
+          }
+        },
+        "disposition": [
+        	"id",
+        	"value"
+        	]
+      },
+      "imports": {
+        "properties": {}
+      }
     }
+    
   },
   "tags": [
     "productivity"
