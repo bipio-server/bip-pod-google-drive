@@ -53,9 +53,7 @@ Update_Cell.prototype.invoke = function(imports, channel, sysImports, contentPar
 			      if(err){
 			    	 next(err,null);
 			      }else{
-			    	//  var message = 'Row:' + row + ' column: ' + col + ' value: ' +value;
-			    	//  log(message, channel, 'success');
-			    	  next(null,true);
+			    	  next();
 			      }
 		     });
 		  }

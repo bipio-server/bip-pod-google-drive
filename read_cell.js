@@ -50,7 +50,7 @@ Read_Cell.prototype.invoke = function(imports, channel, sysImports, contentParts
 		      }else{
 		    	  var col = imports.col,row = imports.row,
 		    	  value = (rows[col] && rows[col][row]) ? rows[col][row] : null;
-		    	  next(err,value);
+		    	  next(err,{value : value});
 		      }
 
 		  });

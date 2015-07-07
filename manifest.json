@@ -349,7 +349,7 @@
     "update_cell": {
       "title": "Update a Spreadsheet Cell on Google Drive",
       "description": "Update a Spreadsheet Cell on Google Drive",
-      "trigger": "poll",
+      "trigger": "invoke",
       "config": {
         "properties": {
         	"spreadsheetName":{
@@ -374,23 +374,13 @@
         	}
         },
         "definitions": {},
-        "required": ["spreadsheetName","worksheetName","row","col"],
-        "disposition": ["spreadsheetName","worksheetName","row","col"]
+        "required": ["spreadsheetName","worksheetName","row","col","value"],
+        "disposition": ["spreadsheetName","worksheetName","row","col","value"]
       },
       "exports": {
         "properties": {
-          "id": {
-            "type": "string",
-            "title": "ID"
-          },
-          "value": {
-            "type": "string",
-            "title": "Cell Value"
-          }
         },
         "disposition": [
-        	"id",
-        	"value"
         	]
       },
       "imports": {
@@ -426,17 +416,12 @@
       },
       "exports": {
         "properties": {
-          "id": {
-            "type": "string",
-            "title": "ID"
-          },
           "value": {
             "type": "string",
             "title": "Cell Value"
           }
         },
         "disposition": [
-        	"id",
         	"value"
         	]
       },
