@@ -25,37 +25,31 @@ Update_Cell.prototype = {};
 
 Update_Cell.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
-    exports = {},
-    log = this.$resource.log,
-    pod = this.pod,
-    auth = pod.getOAuthClient(sysImports),
-    c = pod.getConfig();
-  
+    exports = {};
+
     Spreadsheet.load({
-	    debug: true,
+//	    debug: true,
 	    spreadsheetName: imports.spreadsheetName,
 	    worksheetName: imports.worksheetName,
-	    oauth2: {
-	        client_id: c.oauth.clientID,
-	        client_secret:  c.oauth.clientSecret,
-	        refresh_token:  auth.credentials.access_token
-	      }
-	     
+	    accessToken : {
+	    	type : 'Bearer',
+	    	token : sysImports.auth.oauth.access_token
+	    }
 	  }, function sheetReady(err, spreadsheet) {
 		  if(err){
 		      next(err, null);
-		  }else{
+		  } else{
 			  var row = imports.row, col = imports.col , value = imports.value ,  data = {};
 			  data[row] = {};
 			  data[row][col] = value;
 			  spreadsheet.add(data);
-		      spreadsheet.send(function(err) {
-			      if(err){
-			    	 next(err,null);
-			      }else{
-			    	  next();
-			      }
-		     });
+	      spreadsheet.send(function(err) {
+		      if(err){
+		    	 next(err,null);
+		      } else{
+		    	  next();
+		      }
+	     	});
 		  }
 	  });
 }

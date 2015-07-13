@@ -25,21 +25,16 @@ Read_Cell.prototype = {};
 
 Read_Cell.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
-    exports = {},
-    log = this.$resource.log,
-    pod = this.pod,
-    auth = pod.getOAuthClient(sysImports),
-    c = pod.getConfig();
-  
+    exports = {};
+
     Spreadsheet.load({
 	    debug: true,
 	    spreadsheetName: imports.spreadsheetName,
 	    worksheetName: imports.worksheetName,
-	    oauth2: {
-	        client_id: c.oauth.clientID,
-	        client_secret:  c.oauth.clientSecret,
-	        refresh_token:  auth.credentials.access_token
-	      }
+	    accessToken : {
+	    	type : 'Bearer',
+	    	token : sysImports.auth.oauth.access_token
+	    }
 	  }, function sheetReady(err, spreadsheet) {
 		  if(err){
 		      next(err, null);

@@ -13,7 +13,8 @@
         "https://www.googleapis.com/auth/userinfo.profile",
         "https://www.googleapis.com/auth/drive",
         "https://www.googleapis.com/auth/drive.file",
-        "https://spreadsheets.google.com/feeds"
+        "https://spreadsheets.google.com/feeds",
+        "https://docs.google.com/feeds"
       ],
       "extras": {
         "accessType": "offline",
@@ -255,7 +256,8 @@
         "properties": {
           "headers": {
             "type": "string",
-            "title": "Column Headers"
+            "title": "Column Headers",
+            "description" : "Comma Separated"
           },
           "title": {
             "type": "string",
@@ -429,7 +431,7 @@
         "properties": {}
       }
     }
-    
+
   },
   "tags": [
     "productivity"
