@@ -1,6 +1,6 @@
 /**
  *
- * @author Elie Youssef <elie.youssef@elementn.com>
+ * @author Michael Pearson <elie.youssef@elementn.com>
  * Copyright (c) 2010-2015 WoT.io, Inc http://wot.io
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-  var Spreadsheet = require('edit-google-spreadsheet');
+var Spreadsheet = require('edit-google-spreadsheet');
 
-function Update_Cell() {}
+function AppendRow() {}
 
-Update_Cell.prototype = {};
+AppendRow.prototype = {};
 
-Update_Cell.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
+AppendRow.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
     exports = {};
 
@@ -39,20 +39,27 @@ Update_Cell.prototype.invoke = function(imports, channel, sysImports, contentPar
 		  if(err){
 		      next(err, null);
 		  } else{
-			  var row = imports.row, col = imports.col , value = imports.value ,  data = {};
-			  data[row] = {};
-			  data[row][col] = value;
-			  spreadsheet.add(data);
-	      spreadsheet.send(function(err) {
-		      if(err){
-		    	 next(err,null);
-		      } else{
-		    	  next(false, {});
-		      }
-	     	});
+
+		  	spreadsheet.receive(function(err, rows, info) {
+		  		if (err) {
+		  			next(err);
+		  		} else {
+		  			var data = {};
+
+		  			data[info.lastRow + 1] = [ imports.value.trim().split(',') ];
+		  			spreadsheet.add(data);
+			      spreadsheet.send(function(err) {
+				      if (err) {
+				    	 next(err,null);
+				      } else {
+				    	  next(false, {});
+				      }
+			     	});
+		  		}
+		  	});
 		  }
 	  });
 }
 
 // -----------------------------------------------------------------------------
-module.exports = Update_Cell;
+module.exports = AppendRow;

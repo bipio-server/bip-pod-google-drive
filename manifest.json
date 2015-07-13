@@ -430,6 +430,46 @@
       "imports": {
         "properties": {}
       }
+    },
+
+    "append_row": {
+      "title": "Append To A Spreadsheet",
+      "description": "Appends A Row To An Existing Spreadsheet",
+      "trigger": "invoke",
+      "config": {
+        "properties": {
+          "spreadsheetName":{
+            "type": "string",
+              "title": "Spreadsheet Name"
+          },
+          "worksheetName":{
+            "type": "string",
+              "title": "Worksheet Name"
+          },
+          "value":{
+            "type": "string",
+              "title": "New Row",
+              "description" : "Comma Separated"
+          }
+        },
+        "definitions": {},
+        "required": ["spreadsheetName","worksheetName","value"],
+        "disposition": ["spreadsheetName","worksheetName","value"]
+      },
+      "exports": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "Cell Value"
+          }
+        },
+        "disposition": [
+          "value"
+          ]
+      },
+      "imports": {
+        "properties": {}
+      }
     }
 
   },
