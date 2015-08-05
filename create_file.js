@@ -34,6 +34,7 @@ CreateFile.prototype.invoke = function(imports, channel, sysImports, contentPart
   for (var i = 0; i < contentParts._files.length; i++) {
     (function(file) {
       $resource.file.get(file, function(err, fileStruct, stream) {
+
         if (err) {
           next(err);
         } else {
@@ -47,6 +48,12 @@ CreateFile.prototype.invoke = function(imports, channel, sysImports, contentPart
               mimeType: fileStruct.type,
               body : stream
             }
+          }
+
+          if (imports.folder_id) {
+            args.resource.parents = [
+              { id : imports.folder_id }
+            ]
           }
 
           drive.files.insert(args, function(err, result) {

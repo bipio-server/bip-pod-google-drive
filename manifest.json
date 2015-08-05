@@ -43,6 +43,10 @@
       "contentType": "application/json",
       "title": "List Your Files"
     },
+    "list_folders": {
+      "contentType": "application/json",
+      "title": "List Your Folders"
+    },
     "list_spreadsheets": {
       "contentType": "application/json",
       "title": "List Your Spreadsheets"
@@ -54,9 +58,24 @@
       "description": "Uploads any present file to Google drive",
       "trigger": "invoke",
       "config": {
-        "properties": {},
+        "properties": {
+          "folder_id" : {
+            "type" : "string",
+            "title" : "Target Folder",
+            "label": {
+              "$ref": "/rpcs/list_folders#items/{title}"
+            },
+            "oneOf" : [
+              {
+                "$ref": "/rpcs/list_folders#items/{id}"
+              }
+            ]
+          }
+        },
         "definitions": {},
-        "disposition": []
+        "disposition": [
+          "folder_id"
+        ]
       },
       "exports": {
         "properties": {

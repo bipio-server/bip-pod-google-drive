@@ -80,9 +80,18 @@ Google.getOAuthClient = function(sysImports) {
 
 Google.rpc = function(action, method, sysImports, options, channel, req, res) {
   var auth = this.getOAuthClient(sysImports);
+
   if (method == 'list_files') {
     drive.files.list({
       auth : auth
+    }, function(err, result, gRes) {
+      res.status(gRes.statusCode).send(result);
+    });
+
+  } else if (method == 'list_folders') {
+    drive.files.list({
+      auth : auth,
+      q : "trashed = false and mimeType = 'application/vnd.google-apps.folder'",
     }, function(err, result, gRes) {
       res.status(gRes.statusCode).send(result);
     });
