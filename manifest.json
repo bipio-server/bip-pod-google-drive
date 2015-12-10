@@ -4,6 +4,7 @@
   "description": "Google Drive is a file storage and synchronization service provided by Google",
   "url": "https://drive.google.com/apis-explorer",
   "trackDuplicates": true,
+  "rateLimit" : 100,
   "config": {
     "oauth": {
       "clientID": "",
