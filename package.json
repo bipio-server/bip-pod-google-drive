@@ -17,12 +17,7 @@
   "bugs": {
     "url": "http://github.com/bipio-server/bip-pod-google-drive/issues"
   },
-  "licenses": [
-    {
-      "type": "GNU GPLv3",
-      "url": "http://www.gnu.org/copyleft/gpl.html"
-    }
-  ],
+  "license": "Apache-2.0",
   "main": ".",
   "dependencies": {
     "googleapis": "^1.0.20",
