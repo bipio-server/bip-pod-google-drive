@@ -20,7 +20,7 @@
   "license": "Apache-2.0",
   "main": ".",
   "dependencies": {
-    "googleapis": "^1.0.20",
+    "googleapis": "^59.0.0",
     "passport-google-oauth": ">=0.1.5",
     "pkginfo": "0.2.x",
     "edit-google-spreadsheet": ">=0.0.1"
